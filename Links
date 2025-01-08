@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Links*writingsaboutbuildings</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div style="color: #000000; text-align: left; margin: 100px 200px">       
+            <h2 style="font-family: Tahoma, sans serif; font-size: 13px; font-weight: 400px">Link to Link<br>
+                Send comments
+            </h2>
+            <p align="left" style="font-family: Tahoma, sans serif; font-size: 13px; font-weight: 200px">
+                <a href="iquiry">Inquiry</a><br>    
+                <a href="goods">GOODS</a><br>  
+                <a href="publication">PUBLICATION</a><br>
+                <a href="leaflet">leaflet</a><br>     
+            </p>      
+        </div>
+    </body>
+</html>
