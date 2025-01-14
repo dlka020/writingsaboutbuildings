@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+      }
+
+      .split {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .left {
+        background: white;
+        min-width: 0;
+        flex: 1;
+        transition: opacity 0.2s;
+      }
+
+      .right {
+        background: white;
+        min-width: 0;
+        flex: 1;
+        transition: opacity 0.2s;
+      }
+
+      .gutter {
+        width: 10px;
+        background: #f0f0f0;
+        cursor: col-resize;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .gutter::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 2px;
+        height: 50px;
+        background: #ccc;
+      }
+
+      .qr-container {
+        padding: 20px;
+        text-align: center;
+        width: 300px;
+        margin: 0 auto;
+      }
+
+      .qr-code {
+        width: 200px;
+        height: auto;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 20px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="split left">
+        <div class="qr-container">
+          <img
+            src="../assets/fragments-of-the-wood/exhibition-info-qr.png"
+            alt="Exhibition Information QR"
+            class="qr-code"
+          />
+          <h2>Exhibition Information</h2>
+        </div>
+      </div>
+      <div class="gutter"></div>
+      <div class="split right">
+        <div class="qr-container">
+          <img
+            src="../assets/fragments-of-the-wood/leaflet-qr.png"
+            alt="Leaflet QR"
+            class="qr-code"
+          />
+          <h2>Leaflet</h2>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const container = document.querySelector(".container");
+      const gutter = document.querySelector(".gutter");
+      const left = document.querySelector(".left");
+      const right = document.querySelector(".right");
+
+      let isDragging = false;
+      let startX;
+      let leftWidth;
+
+      gutter.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        leftWidth = left.getBoundingClientRect().width;
+
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+      });
+
+      function onMouseMove(e) {
+        if (!isDragging) return;
+
+        const dx = e.clientX - startX;
+        const newLeftWidth = leftWidth + dx;
+        const containerWidth = container.getBoundingClientRect().width;
+
+        // Limit the drag to prevent complete collapse
+        const minWidth = 0;
+        const maxWidth = containerWidth - 10; // Leave space only for gutter
+
+        const limitedWidth = Math.max(
+          minWidth,
+          Math.min(maxWidth, newLeftWidth)
+        );
+        const percentage = (limitedWidth / containerWidth) * 100;
+
+        // Add opacity control
+        if (limitedWidth < 50) {
+          left.style.opacity = limitedWidth / 50;
+        } else {
+          left.style.opacity = 1;
+        }
+
+        if (containerWidth - limitedWidth - 10 < 50) {
+          right.style.opacity = (containerWidth - limitedWidth - 10) / 50;
+        } else {
+          right.style.opacity = 1;
+        }
+
+        left.style.flex = `0 0 ${percentage}%`;
+        right.style.flex = `0 0 ${100 - percentage}%`;
+      }
+
+      function onMouseUp() {
+        isDragging = false;
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+      }
+    </script>
+  </body>
+</html>
