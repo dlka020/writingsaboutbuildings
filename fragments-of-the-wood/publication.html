@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>fragments of the wood</title>
-        <meta charset="utf-8">
-    </head>
-<body>
-      도록 
-</body>
+  <head>
+    <title>Publication*writingsaboutbuildings</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preload main image -->
+    <link rel="preload" as="image" href="https://picsum.photos/800/1200" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        line-height: 0;
+      }
+
+      .image-container {
+        width: 100%;
+        display: block;
+        font-size: 0;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: filter 0.3s ease-in-out;
+      }
+
+      img.loading {
+        filter: blur(10px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image-container">
+      <img
+        class="loading"
+        src="https://picsum.photos/50/100?blur=5"
+        data-src="https://picsum.photos/800/1200"
+        srcset="
+          https://picsum.photos/400/600    400w,
+          https://picsum.photos/800/1200   800w,
+          https://picsum.photos/1200/1800 1200w
+        "
+        sizes="100vw"
+        alt="Publication"
+        loading="lazy"
+        onload="this.classList.remove('loading')"
+      />
+    </div>
+  </body>
 </html>
