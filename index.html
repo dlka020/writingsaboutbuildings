@@ -1,15 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <!-- TODO: 2월 한달동안 포스터 이미지가 전체 화면에 보이도록 해야함 (데스크톱에서는 양옆 여백 비율 맞춰서, 모바일에서는 꽉 차게) -->
-  <!-- 데스크톱 : 커서 / 모바일 : 터치 -->
-  <!-- 인스타그램 태그 형식의 툴팁들 / 아래쪽에 차례대로 가로 정렬 (같은 간격) -->
-  <!-- 서울아트가이드 : http://www.daljin.com -->
-  <!-- 마실와이드 : https://masilwide.com -->
-  <!-- 공공공간 위드굿즈 : https://withgoods.net -->
-  <!-- 동작아트갤러리 : https://www.instagram.com/djartgallery_?igsh=MW5oNjZxeWs2ZXNzbg== -->
   <head>
     <title>writingsaboutbuildings</title>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .poster-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      .poster-image {
+        max-width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      @media (max-width: 768px) {
+        .poster-image {
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+
+      .tooltip-container {
+        position: fixed;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px;
+      }
+
+      .tooltip {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .tooltip:hover {
+        transform: scale(1.05);
+      }
+
+      .tooltip a {
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      /* Hide default content during February */
+      .default-content {
+        display: none;
+      }
+    </style>
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -49,43 +103,97 @@
     </script>
   </head>
   <body>
-    <div
-      style="background-color: #ffffff; text-align: center; padding: 20px 5px"
-    >
-      <h1 style="font-family: Times New Roman, serif; font-size: 70px">
-        <span>writingsaboutbuildings</span>
-      </h1>
-      <h3 style="font-family: Times New Roman, serif; font-size: 20px">
-        <p>"writingsaboutbuildings" designs mechanism.</p>
-        <p>Public space mediates memory of community.</p>
-        <p>
-          Also, we write about building to narrate collective culture and to
-          make imagination from region.
+    <div id="poster-view" style="display: none">
+      <div class="poster-container">
+        <img
+          src="assets/fragments-of-the-wood/poster.jpeg"
+          alt="Exhibition Poster"
+          class="poster-image"
+        />
+        <div class="tooltip-container">
+          <div class="tooltip">
+            <a href="http://www.daljin.com" target="_blank">@서울아트가이드</a>
+          </div>
+          <div class="tooltip">
+            <a href="https://masilwide.com" target="_blank">@마실와이드</a>
+          </div>
+          <div class="tooltip">
+            <a href="https://withgoods.net" target="_blank"
+              >@공공공간위드굿즈</a
+            >
+          </div>
+          <div class="tooltip">
+            <a
+              href="https://www.instagram.com/djartgallery_?igsh=MW5oNjZxeWs2ZXNzbg=="
+              target="_blank"
+              >@동작아트갤러리</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="default-content">
+      <div
+        style="background-color: #ffffff; text-align: center; padding: 20px 5px"
+      >
+        <h1 style="font-family: Times New Roman, serif; font-size: 70px">
+          <span>writingsaboutbuildings</span>
+        </h1>
+        <h3 style="font-family: Times New Roman, serif; font-size: 20px">
+          <p>"writingsaboutbuildings" designs mechanism.</p>
+          <p>Public space mediates memory of community.</p>
+          <p>
+            Also, we write about building to narrate collective culture and to
+            make imagination from region.
+          </p>
+        </h3>
+      </div>
+      <div align="center" style="padding: 50px 50px">
+        <a href="cv.html">CV</a>
+        <a href="preface.html">Preface</a>
+        <a href="room.html">A ROOM</a>
+        <a href="plants.html">Plants</a>
+        <a href="drinks.html">drinks</a>
+        <a href="treatment.html">Treatment</a>
+        <a href="keywords.html">Keywords</a>
+      </div>
+      <div
+        style="
+          font-family: Times New Roman, serif;
+          font-size: 10px;
+          text-align: center;
+        "
+      >
+        <p style="color: #000000">
+          Copyright 2024. Dongjoo Lee. All rights reserved.
         </p>
-      </h3>
+        <p style="color: #000000">
+          contact info_ writingsaboutbuildings.leee@gmail.com
+        </p>
+      </div>
     </div>
-    <div align="center" style="padding: 50px 50px">
-      <a href="cv.html">CV</a>
-      <a href="preface.html">Preface</a>
-      <a href="room.html">A ROOM</a>
-      <a href="plants.html">Plants</a>
-      <a href="drinks.html">drinks</a>
-      <a href="treatment.html">Treatment</a>
-      <a href="keywords.html">Keywords</a>
-    </div>
-    <div
-      style="
-        font-family: Times New Roman, serif;
-        font-size: 10px;
-        text-align: center;
-      "
-    >
-      <p style="color: #000000">
-        Copyright 2024. Dongjoo Lee. All rights reserved.
-      </p>
-      <p style="color: #000000">
-        contact info_ writingsaboutbuildings.leee@gmail.com
-      </p>
-    </div>
+
+    <script>
+      function checkFebruaryAndShowPoster() {
+        const today = new Date();
+        const isFebruary = today.getMonth() === 1; // 1 represents February (0-based month)
+        const posterView = document.getElementById("poster-view");
+        const defaultContent = document.querySelector(".default-content");
+
+        if (isFebruary) {
+          posterView.style.display = "block";
+          defaultContent.style.display = "none";
+        } else {
+          posterView.style.display = "none";
+          defaultContent.style.display = "block";
+        }
+      }
+
+      // Check on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        checkFebruaryAndShowPoster();
+      });
+    </script>
   </body>
 </html>
