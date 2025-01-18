@@ -126,10 +126,8 @@
               <input type="text" name="sender" id="sender" required />
             </div>
             <div class="form-group">
-              <!-- TODO 이메일 주소 또는 연락처 -->
-              <!-- TODO validation 로직도 추가 필요 -->
-              <label>이메일 주소</label>
-              <input type="email" name="email" id="email" required />
+              <label>이메일 주소 또는 연락처</label>
+              <input type="text" name="contact" id="contact" required />
             </div>
             <div class="form-group">
               <label>문의내용</label>
@@ -161,13 +159,15 @@
           e.preventDefault();
 
           const sender = document.getElementById("sender").value;
-          const email = document.getElementById("email").value;
+          const contact = document.getElementById("contact").value;
           const message = document.getElementById("message").value;
 
-          // 이메일 유효성 검사
+          // 이메일 또는 전화번호 유효성 검사
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(email)) {
-            alert("유효한 이메일 주소를 입력해주세요.");
+          const phoneRegex = /^[0-9-+]{8,}$/;
+
+          if (!emailRegex.test(contact) && !phoneRegex.test(contact)) {
+            alert("유효한 이메일 주소나 전화번호를 입력해주세요.");
             return;
           }
 
@@ -196,7 +196,7 @@
                 fields: [
                   {
                     type: "mrkdwn",
-                    text: `*이메일:*\n${email}`,
+                    text: `*연락처:*\n${contact}`,
                   },
                 ],
               },
