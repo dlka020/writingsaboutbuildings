@@ -10,8 +10,6 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <!-- Preload main image -->
-    <link rel="preload" as="image" href="https://picsum.photos/800/1200" />
     <style>
       * {
         margin: 0;
@@ -29,39 +27,24 @@
 
       .image-container {
         width: 100%;
-        display: block;
-        font-size: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+        font-size: 24px;
+        line-height: 1.5;
+        text-align: center;
+        padding: 20px;
       }
 
       img {
-        width: 100%;
-        height: auto;
-        display: block;
-        transition: filter 0.3s ease-in-out;
-      }
-
-      img.loading {
-        filter: blur(10px);
+        display: none;
       }
     </style>
   </head>
   <body>
-    <div class="image-container">
-      <!-- TODO: '2월 중 도록 출간 예정' 적어두기 / 정가운데 -->
-      <img
-        class="loading"
-        src="https://picsum.photos/50/100?blur=5"
-        data-src="https://picsum.photos/800/1200"
-        srcset="
-          https://picsum.photos/400/600    400w,
-          https://picsum.photos/800/1200   800w,
-          https://picsum.photos/1200/1800 1200w
-        "
-        sizes="100vw"
-        alt="Publication"
-        loading="lazy"
-        onload="this.classList.remove('loading')"
-      />
-    </div>
+    <!-- FIXME: 나중에 도록 이미지로 교체 필요 -->
+    <div class="image-container">2월 중 도록 출간 예정</div>
   </body>
 </html>
