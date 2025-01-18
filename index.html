@@ -14,40 +14,99 @@
         align-items: center;
         margin: 0;
         padding: 0;
+        overflow: hidden;
       }
 
       .poster-image {
-        max-width: 100%;
+        width: auto;
         height: 100%;
         object-fit: contain;
       }
 
       @media (max-width: 768px) {
+        .poster-container {
+          width: 100vw;
+          height: 100vh;
+          overflow: hidden;
+          align-items: flex-start;
+          position: relative;
+        }
+
         .poster-image {
-          object-fit: cover;
-          width: 100%;
+          width: 100vw;
+          height: calc(100vw * (4299 / 3000));
+          object-fit: contain;
+          max-height: 100vh;
+          margin-top: 0;
+        }
+
+        @media (min-aspect-ratio: 3000/4299) {
+          .poster-image {
+            width: calc(100vh * (3000 / 4299));
+            height: 100vh;
+          }
+        }
+
+        .tooltip-container {
+          position: absolute !important;
+          display: grid !important;
+          grid-template-columns: repeat(2, auto) !important;
+          grid-auto-rows: auto !important;
+          width: 300px !important;
+          gap: 10px !important;
+          margin: 0 auto !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          flex-direction: unset !important;
+          justify-content: center !important;
+        }
+
+        .tooltip {
+          font-size: 12px;
+          padding: 6px 12px;
+          white-space: nowrap;
+          width: auto;
+        }
+
+        .tooltip-container.show-mobile {
+          opacity: 1;
         }
       }
 
       .tooltip-container {
-        position: fixed;
+        position: absolute;
         bottom: 20px;
         left: 0;
         right: 0;
         display: flex;
+        flex-direction: row;
         justify-content: center;
         gap: 20px;
         padding: 10px;
+        z-index: 10;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      @media (hover: hover) {
+        .poster-container:hover .tooltip-container {
+          opacity: 1;
+        }
       }
 
       .tooltip {
-        background: rgba(0, 0, 0, 0.8);
-        padding: 8px 15px;
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 6px 12px;
         border-radius: 20px;
         font-family: Arial, sans-serif;
         font-size: 14px;
         cursor: pointer;
         transition: transform 0.2s;
+        text-align: center;
+        white-space: nowrap;
+        display: inline-block;
       }
 
       .tooltip:hover {
@@ -55,8 +114,15 @@
       }
 
       .tooltip a {
-        color: #ffffff;
+        color: #000000;
         text-decoration: none;
+      }
+
+      @media screen and (max-width: 768px) {
+        .poster-container .tooltip-container,
+        .poster-container .tooltip {
+          /* 이 스타일 블록 제거 */
+        }
       }
 
       /* Hide default content during February */
@@ -80,10 +146,51 @@
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
+        const posterContainer = document.querySelector(".poster-container");
+        const tooltipContainer = document.querySelector(".tooltip-container");
+        const posterImage = document.querySelector(".poster-image");
+        let touchTimeout;
+
+        // 포스터 이미지 로드 완료 시 태그 위치 조정
+        posterImage.addEventListener("load", adjustTooltipPosition);
+        // 화면 크기 변경 시 태그 위치 재조정
+        window.addEventListener("resize", adjustTooltipPosition);
+
+        function adjustTooltipPosition() {
+          const posterRect = posterImage.getBoundingClientRect();
+          const tooltipRect = tooltipContainer.getBoundingClientRect();
+          const bottomPosition = posterRect.height - tooltipRect.height - 20; // 20px 여백
+
+          tooltipContainer.style.top = `${bottomPosition}px`;
+          tooltipContainer.style.bottom = "auto";
+        }
+
+        // 모바일 터치 이벤트 처리
+        posterContainer.addEventListener("touchstart", function (e) {
+          if (tooltipContainer.classList.contains("show-mobile")) {
+            tooltipContainer.classList.remove("show-mobile");
+          } else {
+            tooltipContainer.classList.add("show-mobile");
+            adjustTooltipPosition(); // 태그 표시 시 위치 재조정
+          }
+
+          // 5초 후 자동으로 숨김
+          clearTimeout(touchTimeout);
+          touchTimeout = setTimeout(() => {
+            tooltipContainer.classList.remove("show-mobile");
+          }, 5000);
+        });
+
+        // 다른 곳을 터치하면 태그 숨김
+        document.addEventListener("touchstart", function (e) {
+          if (!posterContainer.contains(e.target)) {
+            tooltipContainer.classList.remove("show-mobile");
+          }
+        });
+
+        // 기존 코드 유지
         const today = new Date();
-        // 팝업 시작 날짜 : 2025.1.23
         const startDate = new Date("2025-01-23");
-        // 팝업 종료 날짜 : 2025.2.28
         const endDate = new Date("2025-02-28");
 
         if (today >= startDate && today <= endDate) {
@@ -178,7 +285,7 @@
     <script>
       function checkFebruaryAndShowPoster() {
         const today = new Date();
-        const isFebruary = today.getMonth() === 1; // 1 represents February (0-based month)
+        const isFebruary = today.getMonth() === 0; // 1 represents February (0-based month)
         const posterView = document.getElementById("poster-view");
         const defaultContent = document.querySelector(".default-content");
 
