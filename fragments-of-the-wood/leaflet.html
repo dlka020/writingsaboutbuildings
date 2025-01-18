@@ -11,7 +11,11 @@
       rel="stylesheet"
     />
     <!-- Preload main image -->
-    <link rel="preload" as="image" href="https://picsum.photos/900/1950" />
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/fragments-of-the-wood/leaflet.png"
+    />
     <style>
       * {
         margin: 0;
@@ -31,7 +35,27 @@
       .image-container {
         width: 100%;
         position: relative;
-        padding-top: calc(19.5 / 9 * 100%); /* 9:19.5 aspect ratio */
+        padding-top: calc(
+          10701 / 1252 * 100%
+        ); /* 실제 이미지 비율 (1252:10701) */
+        margin: 0 auto; /* 중앙 정렬을 위해 추가 */
+      }
+
+      /* 데스크톱 화면에서의 최대 너비 제한 */
+      @media screen and (min-width: 768px) {
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        .image-container {
+          width: 60%;
+          max-width: 800px;
+          margin: 0 auto;
+          padding-top: calc(
+            10701 / 1252 * 45%
+          ); /* 60%에서 45%로 줄여서 더 위쪽에 배치 */
+        }
       }
 
       img {
@@ -40,7 +64,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain; /* cover에서 contain으로 변경하여 이미지가 잘리지 않도록 함 */
         display: block;
         transition: filter 0.3s ease-in-out;
       }
@@ -54,12 +78,12 @@
     <div class="image-container">
       <img
         class="loading"
-        src="https://picsum.photos/90/195?blur=5"
-        data-src="https://picsum.photos/900/1950"
+        src="/assets/fragments-of-the-wood/leaflet.png"
+        data-src="/assets/fragments-of-the-wood/leaflet.png"
         srcset="
-          https://picsum.photos/450/975    450w,
-          https://picsum.photos/900/1950   900w,
-          https://picsum.photos/1350/2925 1350w
+          /assets/fragments-of-the-wood/leaflet.png  450w,
+          /assets/fragments-of-the-wood/leaflet.png  900w,
+          /assets/fragments-of-the-wood/leaflet.png 1350w
         "
         sizes="100vw"
         alt="Leaflet"
