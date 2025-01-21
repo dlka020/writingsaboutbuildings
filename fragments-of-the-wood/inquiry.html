@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Inquiry*writingsaboutbuildings</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: "Poppins", sans-serif;
+        background-color: #f5f5f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .inquiry-title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #666;
+      }
+      .inquiry-form {
+        width: 100%;
+        max-width: 400px;
+      }
+      .form-container {
+        background: black;
+        border: 2px solid black;
+        border-radius: 40px;
+        padding: 20px;
+        position: relative;
+      }
+      .form-title {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: white;
+      }
+      .form-content {
+        background: white;
+        border-radius: 20px;
+        padding: 30px 20px;
+      }
+      .form-group {
+        margin-bottom: 25px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-group label::after {
+        content: " :";
+      }
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 8px 0;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        box-sizing: border-box;
+        font-size: 14px;
+        background: transparent;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-bottom-color: #666;
+      }
+      .form-group textarea {
+        height: 100px;
+        resize: none;
+      }
+      .submit-btn {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        padding: 8px 20px;
+        background: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .char-count {
+        text-align: right;
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+      }
+      .footer {
+        font-family: "Poppins", serif;
+        font-size: 10px;
+        text-align: center;
+        margin-top: 40px;
+        color: #666;
+      }
+      @media (max-width: 480px) {
+        .inquiry-form {
+          max-width: 100%;
+        }
+        .form-container {
+          border-radius: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="inquiry-form">
+      <div class="form-container">
+        <div class="form-title">작품 및 전시 문의</div>
+        <div class="form-content">
+          <form id="inquiryForm" name="inquiry">
+            <div class="form-group">
+              <label>보내는 사람 이름</label>
+              <input type="text" name="sender" id="sender" required />
+            </div>
+            <div class="form-group">
+              <label>이메일 주소 또는 연락처</label>
+              <input type="text" name="contact" id="contact" required />
+            </div>
+            <div class="form-group">
+              <label>문의내용</label>
+              <textarea
+                name="message"
+                id="message"
+                maxlength="500"
+                required
+              ></textarea>
+              <div class="char-count"><span id="charCount">0</span>/500</div>
+            </div>
+            <button type="submit" class="submit-btn">전송</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const WORKER_URL = "https://slack-form-worker.dlka020.workers.dev";
+
+      document.getElementById("message").addEventListener("input", function () {
+        const charCount = this.value.length;
+        document.getElementById("charCount").textContent = charCount;
+      });
+
+      document
+        .getElementById("inquiryForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const sender = document.getElementById("sender").value;
+          const contact = document.getElementById("contact").value;
+          const message = document.getElementById("message").value;
+
+          // 이메일 또는 전화번호 유효성 검사
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const phoneRegex = /^[0-9-+]{8,}$/;
+
+          if (!emailRegex.test(contact) && !phoneRegex.test(contact)) {
+            alert("유효한 이메일 주소나 전화번호를 입력해주세요.");
+            return;
+          }
+
+          // Slack 메시지 포맷
+          const slackMessage = {
+            blocks: [
+              {
+                type: "header",
+                text: {
+                  type: "plain_text",
+                  text: "📨 새로운 문의가 도착했습니다",
+                  emoji: true,
+                },
+              },
+              {
+                type: "section",
+                fields: [
+                  {
+                    type: "mrkdwn",
+                    text: `*보내는 사람:*\n${sender}`,
+                  },
+                ],
+              },
+              {
+                type: "section",
+                fields: [
+                  {
+                    type: "mrkdwn",
+                    text: `*연락처:*\n${contact}`,
+                  },
+                ],
+              },
+              {
+                type: "section",
+                text: {
+                  type: "mrkdwn",
+                  text: `*문의내용:*\n${message}`,
+                },
+              },
+            ],
+          };
+
+          try {
+            const response = await axios.post(WORKER_URL, slackMessage);
+            if (response.data === "Success") {
+              alert("문의가 성공적으로 전송되었습니다.");
+              this.reset();
+              document.getElementById("charCount").textContent = "0";
+            } else {
+              alert("문의 전송에 실패했습니다. 다시 시도해주세요.");
+            }
+          } catch (error) {
+            console.error("Error sending inquiry:", error);
+            alert("문의 전송에 실패했습니다. 다시 시도해주세요.");
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Fragments of the Wood*writingsaboutbuildings</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+        font-family: "Poppins", sans-serif;
+      }
+
+      #poster-view {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 1000;
+        background: white;
+      }
+
+      .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+      }
+
+      .split {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .left {
+        background: white;
+        min-width: 0;
+        flex: 1;
+        transition: opacity 0.2s;
+      }
+
+      .right {
+        background: white;
+        min-width: 0;
+        flex: 1;
+        transition: opacity 0.2s;
+      }
+
+      .gutter {
+        width: 10px;
+        background: #f0f0f0;
+        cursor: col-resize;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .gutter::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 2px;
+        height: 50px;
+        background: #ccc;
+      }
+
+      .qr-container {
+        padding: 20px;
+        text-align: center;
+        width: 300px;
+        margin: 0 auto;
+      }
+
+      .qr-code {
+        width: 200px;
+        height: auto;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      .banner {
+        position: fixed;
+        width: 100%;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 16px;
+        z-index: 1; /* Lower z-index than poster-view */
+      }
+
+      .title-banner {
+        top: 0;
+        background: white;
+        color: black;
+      }
+
+      .date-banner {
+        top: 41px;
+        background: white;
+        color: black;
+      }
+
+      .container {
+        padding-top: 90px;
+        padding-bottom: 20px;
+      }
+
+      /* Poster styles */
+      .poster-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .poster-image {
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      @media (max-width: 768px) {
+        .poster-container {
+          width: 100vw;
+          height: 100vh;
+          overflow: hidden;
+          align-items: flex-start;
+          position: relative;
+        }
+
+        .poster-image {
+          width: 100vw;
+          height: calc(100vw * (4299 / 3000));
+          object-fit: contain;
+          max-height: 100vh;
+          margin-top: 0;
+        }
+
+        @media (min-aspect-ratio: 3000/4299) {
+          .poster-image {
+            width: calc(100vh * (3000 / 4299));
+            height: 100vh;
+          }
+        }
+
+        .tooltip-container {
+          position: absolute !important;
+          display: grid !important;
+          grid-template-columns: repeat(2, auto) !important;
+          grid-auto-rows: auto !important;
+          width: 300px !important;
+          gap: 10px !important;
+          margin: 0 auto !important;
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          flex-direction: unset !important;
+          justify-content: center !important;
+        }
+
+        .tooltip {
+          font-size: 12px;
+          padding: 6px 12px;
+          white-space: nowrap;
+          width: auto;
+        }
+
+        .tooltip-container.show-mobile {
+          opacity: 1;
+        }
+      }
+
+      .tooltip-container {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        padding: 10px;
+        z-index: 10;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      @media (hover: hover) {
+        .poster-container:hover .tooltip-container {
+          opacity: 1;
+        }
+      }
+
+      .tooltip {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        text-align: center;
+        white-space: nowrap;
+        display: inline-block;
+      }
+
+      .tooltip:hover {
+        transform: scale(1.05);
+      }
+
+      .tooltip a {
+        color: #000000;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="poster-view">
+      <div class="poster-container">
+        <img
+          src="../assets/fragments-of-the-wood/poster.jpeg"
+          alt="Exhibition Poster"
+          class="poster-image"
+        />
+        <div class="tooltip-container">
+          <div class="tooltip">
+            <a href="http://www.daljin.com" target="_blank">@서울아트가이드</a>
+          </div>
+          <div class="tooltip">
+            <a href="https://masilwide.com" target="_blank">@마실와이드</a>
+          </div>
+          <div class="tooltip">
+            <a href="https://withgoods.net" target="_blank"
+              >@공공공간위드굿즈</a
+            >
+          </div>
+          <div class="tooltip">
+            <a
+              href="https://www.instagram.com/djartgallery_?igsh=MW5oNjZxeWs2ZXNzbg=="
+              target="_blank"
+              >@동작아트갤러리</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner title-banner">
+      2025.2.6 - 2.21 동작문화재단 동작아트갤러리
+    </div>
+    <div class="banner date-banner" id="date-banner"></div>
+    <div class="container">
+      <div class="split left">
+        <div class="qr-container">
+          <img
+            src="../assets/fragments-of-the-wood/exhibition-info-qr.png"
+            alt="Exhibition Information QR"
+            class="qr-code"
+          />
+          <h2>Exhibition Information</h2>
+        </div>
+      </div>
+      <div class="gutter"></div>
+      <div class="split right">
+        <div class="qr-container">
+          <img
+            src="../assets/fragments-of-the-wood/leaflet-qr.png"
+            alt="Leaflet QR"
+            class="qr-code"
+          />
+          <h2>Leaflet</h2>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Date check and popup logic
+      const today = new Date();
+      const startDate = new Date("2025-01-21");
+      const endDate = new Date("2025-02-28");
+      const popupStartDate = new Date("2025-01-23");
+
+      // Check if current date is within display period
+      function checkDisplayPeriod() {
+        const posterView = document.getElementById("poster-view");
+        const container = document.querySelector(".container");
+        const banners = document.querySelectorAll(".banner");
+
+        if (today >= startDate && today <= endDate) {
+          posterView.style.display = "block";
+          container.style.display = "none";
+          banners.forEach((banner) => (banner.style.display = "none"));
+        } else {
+          posterView.style.display = "none";
+          container.style.display = "flex";
+          banners.forEach((banner) => (banner.style.display = "block"));
+        }
+      }
+
+      // Update date banner
+      function updateDateBanner() {
+        const days = ["일", "월", "화", "수", "목", "금", "토"];
+        const dateBanner = document.getElementById("date-banner");
+        dateBanner.textContent = `${today.getMonth() + 1}.${today.getDate()}.${
+          days[today.getDay()]
+        }요일`;
+      }
+      updateDateBanner();
+
+      // Popup logic - starts from 1/23
+      if (today >= popupStartDate && today <= endDate) {
+        window.open(
+          "inquiry.html",
+          "_blank",
+          "width=800,height=600,left=50,top=50"
+        );
+        setTimeout(function () {
+          window.open(
+            "leaflet.html",
+            "_blank",
+            "width=800,height=600,left=100,top=100"
+          );
+        }, 500);
+      }
+
+      // Check display period on load
+      document.addEventListener("DOMContentLoaded", function () {
+        checkDisplayPeriod();
+      });
+
+      // Poster and tooltip logic
+      document.addEventListener("DOMContentLoaded", function () {
+        const posterContainer = document.querySelector(".poster-container");
+        const tooltipContainer = document.querySelector(".tooltip-container");
+        const posterImage = document.querySelector(".poster-image");
+        let touchTimeout;
+
+        // Adjust tooltip position when poster image loads
+        posterImage.addEventListener("load", adjustTooltipPosition);
+        // Readjust tooltip position on window resize
+        window.addEventListener("resize", adjustTooltipPosition);
+
+        function adjustTooltipPosition() {
+          const posterRect = posterImage.getBoundingClientRect();
+          const tooltipRect = tooltipContainer.getBoundingClientRect();
+          const bottomPosition = posterRect.height - tooltipRect.height - 20;
+
+          tooltipContainer.style.top = `${bottomPosition}px`;
+          tooltipContainer.style.bottom = "auto";
+        }
+
+        // Mobile touch event handling
+        posterContainer.addEventListener("touchstart", function (e) {
+          if (tooltipContainer.classList.contains("show-mobile")) {
+            tooltipContainer.classList.remove("show-mobile");
+          } else {
+            tooltipContainer.classList.add("show-mobile");
+            adjustTooltipPosition();
+          }
+
+          clearTimeout(touchTimeout);
+          touchTimeout = setTimeout(() => {
+            tooltipContainer.classList.remove("show-mobile");
+          }, 5000);
+        });
+
+        // Hide tooltips when touching outside
+        document.addEventListener("touchstart", function (e) {
+          if (!posterContainer.contains(e.target)) {
+            tooltipContainer.classList.remove("show-mobile");
+          }
+        });
+      });
+
+      // Existing split panel logic
+      const container = document.querySelector(".container");
+      const gutter = document.querySelector(".gutter");
+      const left = document.querySelector(".left");
+      const right = document.querySelector(".right");
+
+      let isDragging = false;
+      let startX;
+      let leftWidth;
+
+      gutter.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        leftWidth = left.getBoundingClientRect().width;
+
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+      });
+
+      function onMouseMove(e) {
+        if (!isDragging) return;
+
+        const dx = e.clientX - startX;
+        const newLeftWidth = leftWidth + dx;
+        const containerWidth = container.getBoundingClientRect().width;
+
+        const minWidth = 0;
+        const maxWidth = containerWidth - 10;
+
+        const limitedWidth = Math.max(
+          minWidth,
+          Math.min(maxWidth, newLeftWidth)
+        );
+        const percentage = (limitedWidth / containerWidth) * 100;
+
+        if (limitedWidth < 50) {
+          left.style.opacity = limitedWidth / 50;
+        } else {
+          left.style.opacity = 1;
+        }
+
+        if (containerWidth - limitedWidth - 10 < 50) {
+          right.style.opacity = (containerWidth - limitedWidth - 10) / 50;
+        } else {
+          right.style.opacity = 1;
+        }
+
+        left.style.flex = `0 0 ${percentage}%`;
+        right.style.flex = `0 0 ${100 - percentage}%`;
+      }
+
+      function onMouseUp() {
+        isDragging = false;
+        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mouseup", onMouseUp);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Goods*writingsaboutbuildings</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .image-grid {
+        display: flex;
+        flex-direction: column;
+        width: 66.67vw;
+        max-width: 66.67vw;
+        margin: 0 auto;
+        padding: 0 20px;
+        box-sizing: border-box;
+      }
+
+      .image-item {
+        width: 100%;
+        max-width: 100%;
+        line-height: 0;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+
+      .image-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .image-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: filter 0.3s ease-in-out;
+      }
+
+      /* Movie poster aspect ratio (842:1191) */
+      .movie-ratio::before {
+        content: "";
+        display: block;
+        padding-top: 141.45%;
+      }
+
+      /* Postcard 1 aspect ratio (1260:788) */
+      .postcard1-ratio::before {
+        content: "";
+        display: block;
+        padding-top: 62.54%;
+      }
+
+      /* Postcard 2 aspect ratio (788:788) */
+      .postcard2-ratio::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+
+      .image-item img {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image-grid">
+      <div class="image-item movie-ratio">
+        <img
+          src="../assets/fragments-of-the-wood/goods_movie_1.png"
+          alt="Goods Movie 1"
+        />
+      </div>
+      <div class="image-item movie-ratio">
+        <img
+          src="../assets/fragments-of-the-wood/goods_movie_2.jpeg"
+          alt="Goods Movie 2"
+        />
+      </div>
+      <div class="image-item movie-ratio">
+        <img
+          src="../assets/fragments-of-the-wood/goods_movie_3.png"
+          alt="Goods Movie 3"
+        />
+      </div>
+      <div class="image-item postcard1-ratio">
+        <img
+          src="../assets/fragments-of-the-wood/goods_postcard_1_1.png"
+          alt="Goods Postcard 1-1"
+        />
+      </div>
+      <div class="image-item postcard1-ratio">
+        <img
+          src="../assets/fragments-of-the-wood/goods_postcard_1_2.png"
+          alt="Goods Postcard 1-2"
+        />
+      </div>
+      <div class="image-item postcard2-ratio">
+        <img
+          src="../assets/fragments-of-the-wood/goods_postcard_2_1.png"
+          alt="Goods Postcard 2-1"
+        />
+      </div>
+      <div class="image-item postcard2-ratio">
+        <img
+          src="../assets/fragments-of-the-wood/goods_postcard_2_2.png"
+          alt="Goods Postcard 2-2"
+        />
+      </div>
+    </div>
+  </body>
+</html>
