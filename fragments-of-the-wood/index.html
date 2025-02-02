@@ -169,105 +169,6 @@
             height: 100vh;
           }
         }
-
-        .tooltip-container {
-          position: absolute !important;
-          display: grid !important;
-          grid-template-columns: repeat(4, 1fr) !important;
-          grid-template-rows: auto auto !important;
-          width: 100% !important;
-          max-width: 340px !important;
-          gap: 8px !important;
-          padding: 0 10px !important;
-          margin: 0 auto !important;
-          left: 50% !important;
-          transform: translateX(-50%) !important;
-          justify-content: center !important;
-          opacity: 1 !important;
-          bottom: 5% !important;
-        }
-
-        .tooltip-container > div:nth-child(1) {
-          grid-column: 1 / 3;
-          justify-self: end;
-        }
-
-        .tooltip-container > div:nth-child(2) {
-          grid-column: 3 / 5;
-          justify-self: start;
-        }
-
-        .tooltip-container > div:nth-child(3) {
-          grid-column: 1 / 2;
-          justify-self: end;
-        }
-
-        .tooltip-container > div:nth-child(4) {
-          grid-column: 2 / 4;
-          justify-self: center;
-        }
-
-        .tooltip-container > div:nth-child(5) {
-          grid-column: 4 / 5;
-          justify-self: start;
-        }
-
-        .tooltip {
-          font-size: 11px;
-          padding: 4px 8px;
-          white-space: nowrap;
-          width: auto;
-          margin: 0;
-        }
-
-        .tooltip-container.show-mobile {
-          opacity: 1;
-        }
-      }
-
-      .tooltip-container {
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-        right: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 20px;
-        padding: 10px;
-        z-index: 10;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      @media (hover: hover) {
-        .poster-container:hover .tooltip-container {
-          opacity: 1;
-        }
-      }
-
-      .tooltip {
-        background: rgba(255, 255, 255, 0.5);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding: 4px 10px;
-        border-radius: 20px;
-        font-family: Arial, sans-serif;
-        font-size: 12px;
-        cursor: pointer;
-        transition: transform 0.2s;
-        text-align: center;
-        white-space: nowrap;
-        display: inline-block;
-      }
-
-      .tooltip:hover {
-        transform: scale(1.05);
-      }
-
-      .tooltip a {
-        color: #000000;
-        text-decoration: none;
       }
     </style>
   </head>
@@ -279,29 +180,6 @@
           alt="Exhibition Poster"
           class="poster-image"
         />
-        <div class="tooltip-container">
-          <div class="tooltip">
-            <a href="http://www.daljin.com" target="_blank">@서울아트가이드</a>
-          </div>
-          <div class="tooltip">
-            <a href="https://masilwide.com" target="_blank">@마실와이드</a>
-          </div>
-          <div class="tooltip">
-            <a href="https://withgoods.net" target="_blank"
-              >@공공공간위드굿즈</a
-            >
-          </div>
-          <div class="tooltip">
-            <a href="https://anu-seoul.com" target="_blank">@아누</a>
-          </div>
-          <div class="tooltip">
-            <a
-              href="https://www.instagram.com/djartgallery_?igsh=MW5oNjZxeWs2ZXNzbg=="
-              target="_blank"
-              >@동작아트갤러리</a
-            >
-          </div>
-        </div>
       </div>
     </div>
 
@@ -388,18 +266,14 @@
         checkDisplayPeriod();
       });
 
-      // Poster and tooltip logic
+      // Poster logic
       document.addEventListener("DOMContentLoaded", function () {
         const posterContainer = document.querySelector(".poster-container");
-        const tooltipContainer = document.querySelector(".tooltip-container");
         const posterImage = document.querySelector(".poster-image");
 
         // Add click handler for poster area
-        posterContainer.addEventListener("click", function (e) {
-          // Only redirect if clicking directly on poster area, not on tooltips
-          if (!e.target.closest(".tooltip")) {
-            window.location.href = "links.html";
-          }
+        posterContainer.addEventListener("click", function () {
+          window.location.href = "links.html";
         });
       });
 
