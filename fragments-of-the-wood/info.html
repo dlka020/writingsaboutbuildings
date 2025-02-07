@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Fragments of the Wood*writingsaboutbuildings</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+      }
+
+      .split {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .left {
+        background: white;
+        min-width: 0;
+        flex: 1;
+        transition: opacity 0.2s;
+      }
+
+      .right {
+        background: white;
+        min-width: 0;
+        flex: 1;
+        transition: opacity 0.2s;
+      }
+
+      .gutter {
+        width: 10px;
+        background: #f0f0f0;
+        cursor: col-resize;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .gutter::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 2px;
+        height: 50px;
+        background: #ccc;
+      }
+
+      .qr-container {
+        padding: 20px;
+        text-align: center;
+        width: 300px;
+        margin: 0 auto;
+      }
+
+      .qr-code {
+        width: 200px;
+        height: auto;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      .banner {
+        position: fixed;
+        width: 100%;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 16px;
+        z-index: 1;
+      }
+
+      .title-banner {
+        top: 0;
+        background: white;
+        color: black;
+      }
+
+      .date-banner {
+        top: 41px;
+        background: white;
+        color: black;
+      }
+
+      .container {
+        padding-top: 90px;
+        padding-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="banner title-banner">
+      2025.2.6 - 2.21 동작문화재단 동작아트갤러리
+    </div>
+    <div class="banner date-banner" id="date-banner"></div>
+    <div class="container">
+      <div class="split left">
+        <div class="qr-container">
+          <img
+            src="../assets/fragments-of-the-wood/exhibition-info-qr.png"
+            alt="Exhibition Information QR"
+            class="qr-code"
+          />
+          <h2>Exhibition Information</h2>
+        </div>
+      </div>
+      <div class="gutter"></div>
+      <div class="split right">
+        <div class="qr-container">
+          <img
+            src="../assets/fragments-of-the-wood/leaflet-qr.png"
+            alt="Leaflet QR"
+            class="qr-code"
+          />
+          <h2>Leaflet</h2>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Update date banner
+      const today = new Date();
+      const days = ["일", "월", "화", "수", "목", "금", "토"];
+      const dateBanner = document.getElementById("date-banner");
+      dateBanner.textContent = `${today.getMonth() + 1}.${today.getDate()}.${
+        days[today.getDay()]
+      }요일`;
+    </script>
+  </body>
+</html>
