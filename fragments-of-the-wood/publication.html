@@ -23,30 +23,49 @@
         padding: 0;
         line-height: 0;
         font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
       }
 
       .image-container {
         width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        max-width: 800px;
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 40px;
         font-family: "Poppins", sans-serif;
-        font-size: 24px;
-        line-height: 1.5;
+        margin: 0 auto;
+      }
+
+      .publication-info {
         text-align: center;
-        padding: 20px;
+        line-height: 1.8;
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto;
+        margin-bottom: 40px;
       }
 
       img {
-        display: none;
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        display: block;
+      }
+
+      @media (max-width: 768px) {
+        .image-container {
+          padding: 20px;
+          gap: 20px;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- FIXME: 나중에 도록 이미지로 교체 필요 -->
     <div class="image-container">
-      <div style="text-align: left; line-height: 1.8; font-size: 18px">
+      <div class="publication-info">
         <p style="margin-bottom: 20px; font-size: 22px; font-weight: 500">
           『다시 찾아간 숲에서』
         </p>
@@ -58,6 +77,22 @@
         <p>인쇄: 쌩큐컴퍼니</p>
         <p>발행일: 2025년 2월 21일</p>
       </div>
+      <img
+        src="../../assets/fragments-of-the-wood/publication/1.jpeg"
+        alt="Publication image 1"
+      />
+      <img
+        src="../../assets/fragments-of-the-wood/publication/2.jpeg"
+        alt="Publication image 2"
+      />
+      <img
+        src="../../assets/fragments-of-the-wood/publication/3.jpeg"
+        alt="Publication image 3"
+      />
+      <img
+        src="../../assets/fragments-of-the-wood/publication/4.jpeg"
+        alt="Publication image 4"
+      />
     </div>
   </body>
 </html>
