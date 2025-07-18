@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title>Text to Image*writingsaboutbuildings</title>
+    <title>Fragments of the Wood*writingsaboutbuildings</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
@@ -70,5 +70,14 @@
         class="poster-image"
       />
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const posterContainer = document.querySelector(".poster-container");
+        posterContainer.addEventListener("click", function () {
+          window.location.href = "links.html";
+        });
+      });
+    </script>
   </body>
 </html>
