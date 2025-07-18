@@ -26,7 +26,7 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
-        cursor: auto;
+        cursor: pointer;
       }
 
       .poster-image {
@@ -65,10 +65,18 @@
   <body>
     <div class="poster-container">
       <img
-        src="포스터리플렛합침.jpg"
+        src="전시포스터_A2.jpg"
         alt="Exhibition Poster"
         class="poster-image"
       />
     </div>
+     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const posterContainer = document.querySelector(".poster-container");
+        posterContainer.addEventListener("click", function () {
+          window.location.href = "leaflet0728.html";
+        });
+      });
+    </script>
   </body>
 </html>
