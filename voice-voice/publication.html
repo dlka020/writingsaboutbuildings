@@ -3,9 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Publication - To Be Updated</title>
+    <title>Publication - Voice Voice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 40px;
+        font-family: "Inter Tight", sans-serif;
+        background-color: #ffffff;
+        color: #000000;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .publication-info {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        margin-bottom: 40px;
+      }
+
+      .book-title {
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #000000;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 15px;
+        align-items: start;
+      }
+
+      .info-label {
+        font-weight: 500;
+        color: #666666;
+        font-size: 14px;
+      }
+
+      .info-value {
+        font-size: 16px;
+        color: #000000;
+      }
+
+      /* Mobile styles */
+      @media (max-width: 768px) {
+        body {
+          padding: 20px;
+        }
+
+        .publication-info {
+          padding: 20px;
+        }
+
+        .book-title {
+          font-size: 24px;
+        }
+
+        .info-grid {
+          grid-template-columns: 100px 1fr;
+          gap: 12px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>To Be Updated</h1>
+    <div class="container">
+      <div class="publication-info">
+        <h1 class="book-title">『Vegetables on the table』</h1>
+
+        <div class="info-grid">
+          <div class="info-label">저자</div>
+          <div class="info-value">이동주</div>
+
+          <div class="info-label">디자인</div>
+          <div class="info-value">홍소이</div>
+
+          <div class="info-label">쪽수</div>
+          <div class="info-value">60pages</div>
+
+          <div class="info-label">판형</div>
+          <div class="info-value">150×220mm, 무선제본</div>
+
+          <div class="info-label">출판사</div>
+          <div class="info-value">NOWWE</div>
+
+          <div class="info-label">발행일</div>
+          <div class="info-value">2025년 8월 27일</div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
