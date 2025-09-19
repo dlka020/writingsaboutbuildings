@@ -3,9 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exhibition View - To Be Updated</title>
+    <title>Exhibition View</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        padding: 20px 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .image-gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+      }
+
+      .image-item {
+        width: 100%;
+        max-width: 700px;
+      }
+
+      .image-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .image-item img:hover {
+        transform: scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* 모바일 최적화 */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px 0;
+        }
+
+        .container {
+          padding: 0 15px;
+        }
+
+        .image-gallery {
+          gap: 20px;
+        }
+
+        .image-item {
+          max-width: 100%;
+        }
+      }
+
+      /* 큰 화면에서의 최적화 */
+      @media (min-width: 1200px) {
+        .image-item {
+          max-width: 800px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>To Be Updated</h1>
+    <div class="container">
+      <div class="image-gallery">
+        <div class="image-item">
+          <img
+            src="../assets/voice-voice/exhibition_view/1.png"
+            alt="Exhibition View 1"
+          />
+        </div>
+        <div class="image-item">
+          <img
+            src="../assets/voice-voice/exhibition_view/2.png"
+            alt="Exhibition View 2"
+          />
+        </div>
+        <div class="image-item">
+          <img
+            src="../assets/voice-voice/exhibition_view/3.png"
+            alt="Exhibition View 3"
+          />
+        </div>
+        <div class="image-item">
+          <img
+            src="../assets/voice-voice/exhibition_view/4.png"
+            alt="Exhibition View 4"
+          />
+        </div>
+      </div>
+    </div>
   </body>
 </html>
