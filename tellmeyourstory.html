@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Tell me your story*writingsaboutbuildings</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .poster-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .poster-image {
+        width: auto;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      @media (max-width: 768px) {
+        .poster-container {
+          width: 100vw;
+          height: auto;
+          overflow: hidden;
+          align-items: flex-start;
+          position: relative;
+        }
+
+        .poster-image {
+          width: 100vw;
+          height: calc(100vw * (4299 / 3000));
+          object-fit: contain;
+          max-height: 100vh;
+          margin-top: 0;
+          display: block;
+        }
+
+        @media (min-aspect-ratio: 3000/4299) {
+          .poster-image {
+            width: calc(100vh * (3000 / 4299));
+            height: 100vh;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="poster-container">
+      <img
+        src="전시포스터_A2.jpg"
+        alt="Exhibition Poster"
+        class="poster-image"
+      />
+    </div>
+     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const posterContainer = document.querySelector(".poster-container");
+        posterContainer.addEventListener("click", function () {
+          window.location.href = "introduction.html";
+        });
+      });
+    </script>
+  </body>
+</html>
