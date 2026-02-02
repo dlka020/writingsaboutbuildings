@@ -1,29 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>writingsaboutbuildings</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      /* Hide default content during February */
-      .default-content {
-        display: none;
-      }
-    </style>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-NVR9H15G03"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-NVR9H15G03");
-    </script>
   </head>
   <body>
     <div class="default-content">
@@ -37,9 +16,7 @@
         <a href="water.html">Water</a>
         <a href="keywords.html">Keywords</a>
       </div>
-      <div
-        style="background-color: #ffffff; text-align: center; padding: 10px 5px"
-      >
+      <div style="background-color: #ffffff; text-align: center; padding: 10px 5px">
         <h1 style="font-family: Verdana; font-size: 50px; color: #ff0000">
           <span>writingsaboutbuildings</span>
         </h1>
@@ -49,13 +26,7 @@
           <p>Also, we write about building to narrate collective culture and to make imagination from region.</p>
         </h3>
       </div>
-      <div
-        style="
-          font-family: Times New Roman, serif;
-          font-size: 10px;
-          text-align: center;
-        "
-      >
+      <div style="font-family: Times New Roman, serif; font-size: 10px; text-align: center">
         <p style="color: #000000">
           ⓒ 2026. Dongjoo Lee. All rights reserved.
         </p>
@@ -63,28 +34,9 @@
           contact info_ writingsaboutbuildings.leee@gmail.com
         </p>
       </div>
-    </div>
-
-    <script>
-      function checkFebruaryAndShowPoster() {
-        const today = new Date();
-        const isFebruary = today.getMonth() === 1; // 1 represents February (0-based month)
-        const defaultContent = document.querySelector(".default-content");
-
-        if (isFebruary) {
-          window.location.href = "fragments-of-the-wood/index.html";
-        } else {
-          defaultContent.style.display = "block";
-        }
-      }
-
-      // Check on page load
-      document.addEventListener("DOMContentLoaded", function () {
-        checkFebruaryAndShowPoster();
-      });
-    </script>
   </body>
 </html>
+
 
 
 
